@@ -4,6 +4,7 @@ import "../CSS/UserProfile.css";
 import Logo from "/Logo.png";
 import Error from "../Components/Error";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 const UserProfile = () => {
   const [error, setError] = useState(null);
@@ -15,6 +16,7 @@ const UserProfile = () => {
     const userDataFromLocalStorage = localStorage.getItem("userData");
     if (userDataFromLocalStorage) {
       user = JSON.parse(userDataFromLocalStorage);
+      console.log(user)
     } else {
       setError("User not found!!");
     }
@@ -51,7 +53,7 @@ const UserProfile = () => {
             <p className="userProfile-paragraph">Email: {user.email}</p>
           </div>
           <div className="buttons">
-            <button className="reset-password">Reset Password</button>
+          <Link to="/resetpw"> <button className="reset-password">Reset Password</button></Link>
             <button className="logo-out" onClick={handleLogout}>
               Log-Out
             </button>

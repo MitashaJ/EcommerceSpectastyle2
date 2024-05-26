@@ -16,6 +16,7 @@ import PlaceOrder from "./Pages/PlaceOrder";
 import ConformOrder from "./Pages/ConformOrder";
 import Success from "./Pages/Success"
 import PageNotFound from "./Pages/404page";
+import ResetPassword from "./Pages/ResetPassword";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path="/address-payment-placeOrder/confirmOrder" element={<ConformOrder />} ></Route>
         <Route path="/success" element={<Success />} ></Route>
         <Route path="*"  element={<PageNotFound/>} />
+        <Route path="/resetpw" element={<ResetPassword/>} />
       </Routes>
       <Footer />
       <ScrollToTop /> 

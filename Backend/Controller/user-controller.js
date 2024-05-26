@@ -17,6 +17,7 @@
   export const signup = async (req, res, next) => {
     try {
       const { name, email, password } = req.body;
+
       const existingUser = await User.findOne({ email });
   
       if (existingUser) {
@@ -25,7 +26,7 @@
   
       const hashPassword = await bcrypt.hash(password, 10);
   
-      const user = new User({ name, email, password: hashPassword });
+      const user = new User({ name, email, password: hashPassword});
       await user.save();
   
       const token = jwt.sign({ _id: user._id }, process.env.SECRET);
@@ -67,4 +68,32 @@
       res.status(500).json({ message: "Internal server error" });
     }
   };
+
+  export const reset_password = async(req,res)=>{
+    try{
+      const {email,password,confirmPassword} = req.body;
+      const user = await User.findOne({email});
+      if(!user)
+      {
+        return res.status(400).json({ error: "Invalid username" })
+      }
+      if (password !== confirmPassword) {
+        return res.status(400).json({ error: "Passwords don't match" });
+      }
+      const newpassword = await bcrypt.hash(password, 10);
+      User.updateOne({ email : email }, { $set: { password:newpassword } })
+     .then(() => {
+      res.status(200).json({_id:user._id,email:user.email})
+     })
+     .catch(err => {
+      console.log(err)
+      return res.status(400).json({ error: "Unable change password" })
+     });
+    }
+    catch(err)
+    {
+      console.log(err)
+      return res.status(500).json({ error: "Internal server error" })
+    }
+  }
 

@@ -123,7 +123,7 @@ const Profile = () => {
       setLoading(true)
       try {
         const response = await fetch(
-          "https://ecommerce-backend-0wr7.onrender.com/ecommerce/user/signup",
+         "https://ecommerce-backend-0wr7.onrender.com/ecommerce/user/signup",
           {
             method: "POST",
             headers: {
