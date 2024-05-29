@@ -4,9 +4,12 @@ import "../CSS/Product.css";
 import Loader from "../Components/Loader";
 import ProductDetail from "../Components/ProductDetail";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom"; 
 
 const Product = () => {
+
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
@@ -43,6 +46,8 @@ const Product = () => {
       },
     });
     setSelectedProductId(productId);
+    localStorage.setItem("referringPage", "products");
+    navigate(`/productdetail/${productId}`);
   };
 
   const closeProductDetail = () => {
