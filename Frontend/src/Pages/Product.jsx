@@ -11,7 +11,7 @@ const Product = () => {
   const [categories, setCategories] = useState([]);
   const [selectedProductId, setSelectedProductId] = useState(null);
   const [searchText, setSearchText] = useState("");
-
+  const [styles, setStyles] = useState({})
   const [sortOrder, setSortOrder] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortByDate, setSortByDate] = useState("");
@@ -43,10 +43,16 @@ const Product = () => {
       },
     });
     setSelectedProductId(productId);
+    setStyles({
+        filter:"blur(6px)",
+        pointerEvents:"none",
+        position:"fixed"
+    });
   };
 
   const closeProductDetail = () => {
     setSelectedProductId(null);
+    setStyles({});
   };
 
   const filterProducts = () => {
@@ -101,7 +107,7 @@ const Product = () => {
 
   return (
     <Fragment>
-      <div className="product-container">
+      <div style={styles} className="product-container">
         <h1 className="product-heading">Products</h1>
         <input
           type="text"
